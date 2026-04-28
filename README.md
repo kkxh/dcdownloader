@@ -5,7 +5,20 @@
 [![Build Status](https://travis-ci.org/dev-techmoe/python-dcdownloader.svg?branch=master)](https://travis-ci.org/dev-techmoe/python-dcdownloader)
 [![GitHub stars](https://img.shields.io/github/stars/dev-techmoe/python-dcdownloader.svg)](https://github.com/dev-techmoe/python-dcdownloader/stargazers)
 
+> 维护状态：这是从 `dev-techmoe/python-dcdownloader` 继续开发的新项目起点。原项目采用 MIT License，并已于 2022-11-09 归档为只读；本仓库保留原始许可与作者署名，在此基础上继续做兼容性修复、依赖升级和 Parser 扩展。
+
 专注于漫画网站、图站等类似形式的内容站点的批量下载器框架。
+
+## 新维护计划
+
+当前首要目标不是立刻扩大站点支持，而是先恢复项目的可维护性：
+
+* 保留原有命令行入口 `dcdownloader` 和 Parser 机制，避免破坏已有用户脚本。
+* 升级到现代 Python 版本与依赖栈，替换已经过时的 `aiohttp` 调用方式。
+* 建立可重复运行的测试与 CI，再逐步修复 Dmzj、Ehentai 等 Parser。
+* 明确爬取边界，保留原项目“不用于原创漫画站 Parser”的维护原则。
+
+详细路线见 [ROADMAP.md](ROADMAP.md)。
 
 ## 说明
 这个项目最开始是作者编写的一个仅支持某个漫画网站的批量下载器，后来有人提建议说有增加网站的需求，作者便重新梳理了一下思路重构了代码，使其作为一种框架形式存在。DCDownloader是目前一款异步实现的、支持自定义适配的，专注于漫画网站、图站等类似形式的内容站点的批量下载器。通过编写Parser来做到适配不同的网站。   
