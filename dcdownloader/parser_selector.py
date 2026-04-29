@@ -1,7 +1,6 @@
 import re
 
 regular = {
-    'manhua.dmzj.com': 'DmzjParser',
     'e-hentai.org': 'EhentaiParser'
 }
 

@@ -1,6 +1,7 @@
 from flask import Flask, send_from_directory
 app = Flask(__name__)
 from flask import render_template
+from pathlib import Path
 from threading import Thread
 
 book = {
@@ -56,7 +57,7 @@ chapter_num_per_page = 3
 
 @app.route('/static/<path>')
 def re_static(path):
-    return send_from_directory('static', path)
+    return send_from_directory(Path(__file__).parent / 'static', path)
 
 @app.route('/')
 def main():
@@ -75,7 +76,10 @@ class ServerThread(Thread):
         app.run(port=32321, debug=False, use_reloader=False, threaded=True)
 
 def launch():
-    ServerThread().start()
+    thread = ServerThread()
+    thread.daemon = True
+    thread.start()
+    return thread
 
 if __name__ == '__main__':
     launch()

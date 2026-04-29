@@ -2,69 +2,73 @@ from abc import ABCMeta, abstractmethod
 
 class BaseParser(metaclass=ABCMeta):
 
-    # filename extension for downloaded file
+    # Optional fixed filename extension for downloaded images.
     filename_extension = None
-    # request_header
+
+    # Optional HTTP headers used when fetching the target site.
     request_header = None
 
-    # if target website not has the chapter list
-    # e.g. Ehentai
-    # turn this attribute to False
+    # Set to False when the target page has no section/chapter layer and
+    # parse_chapter returns a flat list of page URLs.
     chapter_mode = True
 
     @abstractmethod
     async def parse_info(self, data):
-        """ Get detail of target page (e.g.: name, author, etc.)
+        """Parse collection metadata from the target page.
+
             Args:
-                data: data come from requesting specified URL.
+                data: Text returned from requesting the target URL.
             
             Returns:
                 {
-                    'name': '...'
+                    'name': 'collection name'
                 }
         """
     
 
     @abstractmethod
-    async def parse_chapter(self, data, page):
-        """ Parse chapter data from received data.
+    async def parse_chapter(self, data):
+        """Parse section/page URLs from the target page.
+
             Args:
-                data: data come from requesting specified URL.
+                data: Text returned from requesting the target URL.
 
             Returns: 
-                if self.chapter_mode == True (default):
+                When self.chapter_mode is True (default):
                 (
                     {
-                        'chapter_name': 'url'
+                        'section_name': 'section_url'
                     },
-                    'url_of_next_chapter_page(optional)'
+                    'url_of_next_section_page(optional)'
                 )
-                else:
+
+                When self.chapter_mode is False:
                 (
                     (<url1>, <url2>, <url3>, ...),
-                    'url_of_next_chapter_page(optional)'
+                    'url_of_next_page(optional)'
                 )
-                Return must be a list
         """
     
     @abstractmethod
     async def parse_image_list(self, data):
-        """ Parse image URL from received data.
+        """Parse image URLs from a section/page response.
+
             Args:
-                data: data come from requesting specified URL.
+                data: Text returned from requesting a section/page URL.
             
             Returns:
                 {
-                    'file_name': 'url'
+                    'file_stem': 'image_url'
                 }
         """
     
     async def parse_downloaded_data(self, data):
-        """ Process the downloaded data. (optional)
-            You can do some action (such as decrypt, unzip, etc) in there
+        """Optionally transform downloaded image bytes before saving.
+
             Args:
-                data: data come from requesting specified URL.
+                data: Bytes returned from requesting an image URL.
             
             Returns:
-                processed data
+                Bytes to write to disk.
         """
+        return data
