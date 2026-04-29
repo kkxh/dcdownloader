@@ -10,7 +10,6 @@ default_config = {
     'downloader_max_retry_number': 5,
     'friendly_console_output': False,
     'header': {
-        'referer': 'https://manhua.dmzj.com/',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36'
     },
 }
@@ -19,7 +18,7 @@ config = {}
 
 def load(text):
     global config
-    config = yaml.load(text)
+    config = yaml.safe_load(text) or {}
 
 def load_file(file_path):
     with open(file_path) as f:

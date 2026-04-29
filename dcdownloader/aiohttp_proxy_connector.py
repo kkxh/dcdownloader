@@ -9,6 +9,8 @@ class ProxyConnector(aiohttp.connector.TCPConnector):
             self.proxy = kwargs.get('proxy')
 
         kwargs.pop('proxy')
+        if 'verify_ssl' in kwargs and 'ssl' not in kwargs:
+            kwargs['ssl'] = kwargs.pop('verify_ssl')
 
         super().__init__(*args, **kwargs)
 

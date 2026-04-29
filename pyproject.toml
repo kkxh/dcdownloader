@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DCDownloader"
+dynamic = ["version"]
+description = "A pluggable crawler framework for extracting image collections from target sites"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "techmoe" }
+]
+dependencies = [
+    "aiofiles>=23.2",
+    "aiohttp>=3.9",
+    "colorlog>=6.8",
+    "cssselect>=1.2",
+    "filetype>=1.2",
+    "lxml>=4.9",
+    "pyquery>=2.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "Flask>=3.0",
+    "pytest>=8.0",
+]
+
+[project.scripts]
+dcdownloader = "dcdownloader.main:main"
+
+[project.urls]
+Homepage = "https://github.com/dev-techmoe/python-dcdownloader"
+
+[tool.setuptools.dynamic]
+version = { attr = "dcdownloader.version.version" }
+
+[tool.setuptools.packages.find]
+include = ["dcdownloader", "dcdownloader.*"]
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+python_files = ["test_*.py"]

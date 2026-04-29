@@ -4,7 +4,7 @@ This repository is a continuation of `dev-techmoe/python-dcdownloader`, which wa
 
 ## Project Positioning
 
-DCDownloader remains a comic/image-site downloader framework with pluggable parsers. The continuation should prioritize maintainability, testability, and respectful crawling behavior before adding new site support.
+DCDownloader is being repositioned as a pluggable image-site crawler framework. The continuation should prioritize maintainability, testability, respectful crawling behavior, and fast Parser adaptation for user-specified sites before adding broad built-in site support.
 
 ## Phase 0: Project Takeover
 
@@ -33,9 +33,10 @@ DCDownloader remains a comic/image-site downloader framework with pluggable pars
 ## Phase 3: Parser Health
 
 - Treat `SimpleParser` as the stable contract test parser.
-- Recheck `DmzjParser` and `EhentaiParser` against current site behavior before claiming support.
-- Mark broken parsers clearly rather than silently failing.
-- Keep the original policy against parsers for original-comic hosting sites unless project policy is deliberately changed.
+- Keep built-in Parser examples minimal and site-neutral where possible.
+- Recheck legacy site-specific parsers against current site behavior before claiming support.
+- Mark broken or unverified parsers clearly rather than silently failing.
+- Document the expected Parser adaptation workflow for extracting images and organizing them into collections. (Started in `docs/parser-adapter-guide.md`.)
 
 ## Phase 4: Release
 
